@@ -1,6 +1,7 @@
 package com.tizzone.instantnewsapplication.data.network
 
 import com.tizzone.instantnewsapplication.BuildConfig.NEWS_API_KEY
+import com.tizzone.instantnewsapplication.data.network.model.NewsResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -11,5 +12,5 @@ interface NewsApi {
         countryCode: String = "fr",
         @Query("apiKey")
         newsApiKey: String = NEWS_API_KEY
-    )
+    ): NewsResponse
 }
