@@ -1,7 +1,8 @@
-package com.tizzone.instantnewsapplication
+package com.tizzone.instantnewsapplication.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.tizzone.instantnewsapplication.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
