@@ -3,6 +3,7 @@ package com.tizzone.instantnewsapplication.data.di
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.tizzone.instantnewsapplication.data.network.NewsApi
+import com.tizzone.instantnewsapplication.domain.model.mappers.ArticlesItemDtoMapper
 import com.tizzone.instantnewsapplication.utils.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -31,5 +32,11 @@ object ApiModule {
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .build()
             .create(NewsApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun providesArticlesItemDtoMapper(): ArticlesItemDtoMapper {
+        return ArticlesItemDtoMapper()
     }
 }
