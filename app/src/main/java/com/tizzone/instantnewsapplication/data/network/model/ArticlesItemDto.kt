@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ArticlesItem(
+data class ArticlesItemDto(
 
 	@field:SerializedName("publishedAt")
 	val publishedAt: String? = null,
