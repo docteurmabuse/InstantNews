@@ -19,7 +19,8 @@ class ArticlesRepositoryImpl @Inject constructor(
             val articlesList = networkArticles?.let { mapper.toDomainArticleList(it) }
             emit(articlesList)
         } catch (e: IOException) {
-            Timber.e(e)
+            e.printStackTrace()
+            Timber.e(e.toString())
         }
     }
 }
