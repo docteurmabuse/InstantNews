@@ -1,4 +1,4 @@
-package com.tizzone.instantnewsapplication.domain.usescases
+package com.tizzone.instantnewsapplication.domain.usecases.articles_list
 
 import com.tizzone.instantnewsapplication.domain.repositories.ArticlesRepositoryImpl
 import javax.inject.Inject

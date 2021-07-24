@@ -1,7 +1,7 @@
 package com.tizzone.instantnewsapplication.presentation.ui
 
 import androidx.lifecycle.ViewModel
-import com.tizzone.instantnewsapplication.domain.usescases.GetAllHeadlines
+import com.tizzone.instantnewsapplication.domain.usecases.articles_list.GetAllHeadlines
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
