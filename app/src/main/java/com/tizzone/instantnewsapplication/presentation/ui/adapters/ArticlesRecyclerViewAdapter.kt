@@ -11,21 +11,19 @@ import com.tizzone.instantnewsapplication.domain.model.Article
 
 /**
  * [RecyclerView.Adapter] that can display an [Article].
- * TODO: Replace the implementation with code for your data type.
+ *
  */
 class ArticlesRecyclerViewAdapter(
-
+    private val interaction: Interaction
 ) : PagingDataAdapter<Article, ArticlesRecyclerViewAdapter.ArticleViewHolder>(ARTICLES_COMPARATOR) {
 
     companion object {
         private val ARTICLES_COMPARATOR = object : DiffUtil.ItemCallback<Article>() {
-            override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
-                TODO("Not yet implemented")
-            }
+            override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean =
+                oldItem.url == newItem.url
 
-            override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
-                TODO("Not yet implemented")
-            }
+            override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean =
+                oldItem == newItem
         }
     }
 
@@ -36,11 +34,12 @@ class ArticlesRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-        val articles = getItem(position)
+        val article = getItem(position)
         holder.itemView.apply {
-            if (articles != null) {
-                holder.idView.text = articles.title
-                holder.contentView.text = articles.description
+            if (article != null) {
+                holder.bind(article)
+                holder.idView.text = article.title
+                holder.contentView.text = article.description
             }
         }
     }
@@ -50,8 +49,18 @@ class ArticlesRecyclerViewAdapter(
         val idView: TextView = binding.itemNumber
         val contentView: TextView = binding.content
 
+        fun bind(article: Article) {
+            itemView.setOnClickListener {
+                interaction.onItemSelected(bindingAdapterPosition, article)
+            }
+        }
+
         override fun toString(): String {
             return super.toString() + " '" + contentView.text + "'"
         }
+    }
+
+    interface Interaction {
+        fun onItemSelected(position: Int, article: Article)
     }
 }

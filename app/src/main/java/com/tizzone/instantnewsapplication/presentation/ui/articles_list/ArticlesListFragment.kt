@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.tizzone.instantnewsapplication.databinding.FragmentArticlesListBinding
+import com.tizzone.instantnewsapplication.domain.model.Article
 import com.tizzone.instantnewsapplication.presentation.ui.adapters.ArticlesRecyclerViewAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
  * A fragment representing a list of Items.
  */
 @AndroidEntryPoint
-class ArticlesListFragment : Fragment() {
+class ArticlesListFragment : Fragment(), ArticlesRecyclerViewAdapter.Interaction {
 
     private var columnCount = 1
     private var _binding: FragmentArticlesListBinding? = null
@@ -62,7 +63,7 @@ class ArticlesListFragment : Fragment() {
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        articlesAdapter = ArticlesRecyclerViewAdapter()
+        articlesAdapter = ArticlesRecyclerViewAdapter(this@ArticlesListFragment)
         recyclerView.apply {
             adapter = articlesAdapter.apply {
 
@@ -74,5 +75,9 @@ class ArticlesListFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onItemSelected(position: Int, article: Article) {
+        TODO("Not yet implemented")
     }
 }
