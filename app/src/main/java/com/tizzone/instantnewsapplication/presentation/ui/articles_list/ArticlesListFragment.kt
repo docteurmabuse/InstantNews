@@ -96,6 +96,13 @@ class ArticlesListFragment : Fragment(), ArticlesRecyclerViewAdapter.Interaction
         progressBar = binding.progressBarList
         val recyclerView: RecyclerView = binding.articlesList
         setupRecyclerView(recyclerView)
+        setupSwipeListener()
+    }
+
+    private fun setupSwipeListener() {
+        swipeRefreshLayout.setOnRefreshListener {
+            articlesAdapter.refresh()
+        }
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
