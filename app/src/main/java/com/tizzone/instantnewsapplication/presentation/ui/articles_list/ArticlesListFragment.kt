@@ -70,6 +70,10 @@ class ArticlesListFragment : Fragment(), ArticlesRecyclerViewAdapter.Interaction
                             articlesAdapter.submitData(articles)
                         }
                     }
+                    DataState.Status.LOADING -> {
+                        //Do Something
+                    }
+
                     DataState.Status.ERROR -> {
                         displayError(it.message)
                     }
