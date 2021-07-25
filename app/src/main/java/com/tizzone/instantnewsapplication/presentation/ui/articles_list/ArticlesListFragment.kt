@@ -67,6 +67,7 @@ class ArticlesListFragment : Fragment(), ArticlesRecyclerViewAdapter.Interaction
 
     private fun setObserver() {
         newJobs?.cancel()
+        //Fetch data from ViewModel
         newJobs = lifecycleScope.launch {
             val value = viewModel.stateArticles
             value.collectLatest {
@@ -124,9 +125,11 @@ class ArticlesListFragment : Fragment(), ArticlesRecyclerViewAdapter.Interaction
             adapter = articlesAdapter.apply {
                 addLoadStateListener { loadState ->
                     if (loadState.refresh is LoadState.Loading) {
+                        //Show progressBar or swipe on load
                         progressBar.visibility = View.VISIBLE
                         swipeRefreshLayout.isRefreshing = isVisible
                     } else {
+                        //Hide progressBar or swipe on load
                         progressBar.visibility = View.GONE
                         swipeRefreshLayout.isRefreshing = isHidden
 
