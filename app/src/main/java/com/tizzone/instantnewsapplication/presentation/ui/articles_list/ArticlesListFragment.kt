@@ -21,6 +21,7 @@ import com.tizzone.instantnewsapplication.domain.data.DataState
 import com.tizzone.instantnewsapplication.domain.model.Article
 import com.tizzone.instantnewsapplication.presentation.ui.adapters.ArticlesRecyclerViewAdapter
 import com.tizzone.instantnewsapplication.presentation.ui.article.ArticleDetailFragment
+import com.tizzone.instantnewsapplication.utils.ARG_ARTICLE_ID
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
@@ -160,10 +161,10 @@ class ArticlesListFragment : Fragment(), ArticlesRecyclerViewAdapter.Interaction
     }
 
     override fun onItemSelected(position: Int, article: Article) {
-        Timber.d("Click Article position: $position")
+        Timber.d("Click Article position: $position & ${article.title}")
         val navHostFragment: View? = view?.findViewById(R.id.nav_host_fragment_activity_main)
         val bundle = Bundle()
-        bundle.putParcelable(ArticleDetailFragment.ARG_ARTICLE_ID, article)
-        view?.findNavController()?.navigate(R.id.articleDetailFragment)
+        bundle.putParcelable(ARG_ARTICLE_ID, article)
+        view?.findNavController()?.navigate(R.id.articleDetailFragment, bundle)
     }
 }

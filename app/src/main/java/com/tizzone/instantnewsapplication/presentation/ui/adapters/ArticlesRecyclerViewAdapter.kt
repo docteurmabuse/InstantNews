@@ -42,7 +42,7 @@ class ArticlesRecyclerViewAdapter(
             if (article != null) {
                 holder.bind(article)
                 holder.titleView.text = article.title
-                holder.descriptionView.text = article.description
+               // holder.descriptionView.text = article.description
                 holder.imageView.load(article.imageUrl) {
                     crossfade(true)
                     placeholder(R.drawable.ic_baseline_image_24)
@@ -55,7 +55,7 @@ class ArticlesRecyclerViewAdapter(
     inner class ArticleViewHolder(binding: FragmentArticleItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         val titleView: TextView = binding.articleTitleText
-        val descriptionView: TextView = binding.articleDescriptionText
+      //  val descriptionView: TextView = binding.articleDescriptionText
         val imageView: AppCompatImageView = binding.articleImage
         fun bind(article: Article) {
             itemView.setOnClickListener {

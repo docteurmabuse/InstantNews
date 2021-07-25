@@ -14,40 +14,28 @@
             android:id="@+id/article_title_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
             android:ellipsize="end"
-            android:maxLines="3"
+            android:maxLines="5"
             android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textStyle="bold"
+            android:paddingEnd="8dp"
+            android:layout_marginTop="16dp"
             android:justificationMode="inter_word"
             app:layout_constraintEnd_toStartOf="@id/article_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/article_description_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:ellipsize="end"
-            android:maxLines="6"
-            android:justificationMode="inter_word"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@id/article_image"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/article_title_text" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/article_image"
-            android:layout_width="110dp"
-            android:layout_height="130dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="90dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="16dp"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/article_description_text"
+            app:layout_constraintStart_toEndOf="@id/article_title_text"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
