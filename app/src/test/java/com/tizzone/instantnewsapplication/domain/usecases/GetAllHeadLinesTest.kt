@@ -48,10 +48,11 @@ class GetAllHeadLinesTest {
             .build()
             .create(NewsApi::class.java)
 
+        //Instantiate system in test
         articlesRepositoryImpl = ArticlesRepositoryImpl(newsApi, dtoMapper)
 
         //Instantiate system in test
-        getAllHeadLines = GetAllHeadlines(articlesRepositoryImpl)
+       // getAllHeadLines = GetAllHeadlines(articlesRepositoryImpl)
     }
 
     @Test
@@ -63,12 +64,9 @@ class GetAllHeadLinesTest {
                 .setBody(headlinesListResponse)
         )
 
-        val flowItems = getAllHeadLines.invoke().toList()
-        val articles = flowItems[0]
-        if(articles !=null){
-            assert(articles.isNotEmpty())
-            assert(articles.get(index = 0) is Article)
-        }
+        val articles =  newsApi.getHeadLines().articles.let { dtoMapper.toDomainArticleList(it) }
+        assert(articles.isNotEmpty())
+        assert(articles.get(index = 0) is Article)
 
     }
 
