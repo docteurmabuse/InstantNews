@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.tizzone.instantnewsapplication.databinding.FragmentArticlesListBinding
+import com.tizzone.instantnewsapplication.presentation.ui.adapters.ArticlesRecyclerViewAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -31,6 +32,7 @@ class ArticlesListFragment : Fragment() {
     //Views
     lateinit var swipeRefreshLayout: SwipeRefreshLayout
     lateinit var progressBar: ProgressBar
+    lateinit var articlesAdapter: ArticlesRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +45,7 @@ class ArticlesListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentArticlesListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -60,7 +62,11 @@ class ArticlesListFragment : Fragment() {
         swipeRefreshLayout = binding.swipeList
         progressBar = binding.progressBarList
         val recyclerView: RecyclerView = binding.articlesList
+        setupRecyclerView(recyclerView)
+    }
 
+    private fun setupRecyclerView(recyclerView: RecyclerView) {
+        articlesAdapter = ArticlesRecyclerViewAdapter()
     }
 
     override fun onDestroy() {

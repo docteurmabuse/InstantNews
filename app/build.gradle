@@ -93,10 +93,10 @@ dependencies {
     //The Paging library helps you load and display pages of data from a larger dataset from local storage or over network.
     def paging_version = "3.0.1"
 
-    implementation("androidx.paging:paging-runtime:$paging_version")
+    implementation("androidx.paging:paging-runtime-ktx:$paging_version")
 
     // alternatively - without Android dependencies for tests
-    testImplementation("androidx.paging:paging-common:$paging_version")
+    testImplementation("androidx.paging:paging-common-ktx:$paging_version")
 
     // For instrumentation tests
     androidTestImplementation("com.google.dagger:hilt-android-testing:$hilt_version")

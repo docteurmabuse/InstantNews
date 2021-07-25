@@ -7,7 +7,6 @@ import com.tizzone.instantnewsapplication.domain.model.Article
 import com.tizzone.instantnewsapplication.domain.model.mappers.ArticlesItemDtoMapper
 import com.tizzone.instantnewsapplication.domain.repositories.ArticlesRepositoryImpl
 import com.tizzone.instantnewsapplication.domain.usecases.articles_list.GetAllHeadlines
-import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import okhttp3.HttpUrl
 import okhttp3.mockwebserver.MockResponse

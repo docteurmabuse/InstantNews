@@ -32,7 +32,7 @@ class ArticlesListViewModel
         viewModelScope.launch {
             getAllHeadlines.invoke()
                 .catch { e ->
-                    _stateArticles.value = DataState.error("Error: ${e.toString()}", null)
+                    _stateArticles.value = DataState.error("Error: $e", null)
                 }
                 .cachedIn(viewModelScope)
                 .collectLatest { pagingDataArticles ->

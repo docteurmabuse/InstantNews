@@ -4,7 +4,7 @@ import com.tizzone.instantnewsapplication.data.network.model.ArticlesItemDto
 import com.tizzone.instantnewsapplication.domain.model.Article
 import java.util.*
 
-class ArticlesItemDtoMapper() : ApiMapper<ArticlesItemDto, Article> {
+class ArticlesItemDtoMapper : ApiMapper<ArticlesItemDto, Article> {
     override fun mapToDomainModel(itemDto: ArticlesItemDto): Article {
         return Article(
             id = UUID.randomUUID().toString(),
