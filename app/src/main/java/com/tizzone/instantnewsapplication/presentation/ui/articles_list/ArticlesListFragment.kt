@@ -1,16 +1,13 @@
 package com.tizzone.instantnewsapplication.presentation.ui.articles_list
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.tizzone.instantnewsapplication.R
-import com.tizzone.instantnewsapplication.presentation.ui.adapters.ArticlesRecyclerViewAdapter
-import com.tizzone.instantnewsapplication.presentation.ui.placeholder.PlaceholderContent
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
+import com.tizzone.instantnewsapplication.databinding.FragmentArticlesListBinding
 
 /**
  * A fragment representing a list of Items.
@@ -18,6 +15,14 @@ import com.tizzone.instantnewsapplication.presentation.ui.placeholder.Placeholde
 class ArticlesListFragment : Fragment() {
 
     private var columnCount = 1
+    private var _binding: FragmentArticlesListBinding? = null
+
+    //This property is only available between onCreateView & onDestroyView.
+    private val binding get() = _binding!!
+
+    //ViewModels
+    private val viewModel: ArticlesListViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,19 +36,14 @@ class ArticlesListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_articles_list, container, false)
+        _binding = FragmentArticlesListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = ArticlesRecyclerViewAdapter(PlaceholderContent.ITEMS)
-            }
-        }
-        return view
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val recyclerView: RecyclerView = binding.articlesList
+
     }
 
     companion object {
