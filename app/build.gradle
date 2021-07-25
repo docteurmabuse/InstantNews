@@ -35,6 +35,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 secrets {
     // Change the properties file from the default "local.properties" in your root project
@@ -54,6 +57,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     //Retrofit : A type-safe HTTP client for Android
     def retrofit_version = "2.9.0"
