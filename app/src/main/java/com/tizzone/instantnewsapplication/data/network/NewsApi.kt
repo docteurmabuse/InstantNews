@@ -10,6 +10,10 @@ interface NewsApi {
     suspend fun getHeadLines(
         @Query("country")
         countryCode: String = "fr",
+        @Query("page")
+        page:Int =1,
+        @Query("pageSize")
+        pageSize: Int = 10,
         @Query("apiKey")
         newsApiKey: String = NEWS_API_KEY
     ): NewsResponse
