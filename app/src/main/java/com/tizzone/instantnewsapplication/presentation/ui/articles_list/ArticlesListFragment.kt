@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -21,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 /**
  * A fragment representing a list of Items.
@@ -96,7 +98,30 @@ class ArticlesListFragment : Fragment(), ArticlesRecyclerViewAdapter.Interaction
         articlesAdapter = ArticlesRecyclerViewAdapter(this@ArticlesListFragment)
         recyclerView.apply {
             adapter = articlesAdapter.apply {
+                addLoadStateListener { loadState ->
+                    if (loadState.refresh is LoadState.Loading) {
+                        progressBar.visibility = View.VISIBLE
+                        swipeRefreshLayout.isRefreshing = isVisible
+                    } else {
+                        progressBar.visibility = View.GONE
+                        swipeRefreshLayout.isRefreshing = isHidden
 
+                        //Getting the error
+                        val errorState = when {
+                            loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
+                            loadState.append is LoadState.Error -> loadState.append as LoadState.Error
+                            loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
+                            else -> null
+                        }
+                        errorState?.let {
+                            Toast.makeText(
+                                requireContext(),
+                                "Error; ${it.error.message}",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+                }
             }
             layoutManager = LinearLayoutManager(activity)
         }
@@ -108,6 +133,6 @@ class ArticlesListFragment : Fragment(), ArticlesRecyclerViewAdapter.Interaction
     }
 
     override fun onItemSelected(position: Int, article: Article) {
-        TODO("Not yet implemented")
+        Timber.d("Click Article")
     }
 }

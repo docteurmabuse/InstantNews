@@ -3,9 +3,12 @@ package com.tizzone.instantnewsapplication.presentation.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.tizzone.instantnewsapplication.R
 import com.tizzone.instantnewsapplication.databinding.FragmentArticleItemBinding
 import com.tizzone.instantnewsapplication.domain.model.Article
 
@@ -38,25 +41,26 @@ class ArticlesRecyclerViewAdapter(
         holder.itemView.apply {
             if (article != null) {
                 holder.bind(article)
-                holder.idView.text = article.title
-                holder.contentView.text = article.description
+                holder.titleView.text = article.title
+                holder.descriptionView.text = article.description
+                holder.imageView.load(article.imageUrl) {
+                    crossfade(true)
+                    placeholder(R.drawable.ic_baseline_image_24)
+                    fallback(R.drawable.ic_baseline_image_24)
+                }
             }
         }
     }
 
     inner class ArticleViewHolder(binding: FragmentArticleItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val idView: TextView = binding.itemNumber
-        val contentView: TextView = binding.content
-
+        val titleView: TextView = binding.articleTitleText
+        val descriptionView: TextView = binding.articleDescriptionText
+        val imageView: AppCompatImageView = binding.articleImage
         fun bind(article: Article) {
             itemView.setOnClickListener {
                 interaction.onItemSelected(bindingAdapterPosition, article)
             }
-        }
-
-        override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
         }
     }
 
