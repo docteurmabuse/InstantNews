@@ -1,4 +1,4 @@
-package com.tizzone.instantnewsapplication.presentation.ui
+package com.tizzone.instantnewsapplication.presentation.ui.articles_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

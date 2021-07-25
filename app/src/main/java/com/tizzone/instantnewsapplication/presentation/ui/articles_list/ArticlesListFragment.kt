@@ -1,4 +1,4 @@
-package com.tizzone.instantnewsapplication.presentation.ui
+package com.tizzone.instantnewsapplication.presentation.ui.articles_list
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tizzone.instantnewsapplication.R
+import com.tizzone.instantnewsapplication.presentation.ui.adapters.ArticlesRecyclerViewAdapter
 import com.tizzone.instantnewsapplication.presentation.ui.placeholder.PlaceholderContent
 
 /**
