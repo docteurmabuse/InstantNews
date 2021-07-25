@@ -8,6 +8,7 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.tizzone.instantnewsapplication.databinding.FragmentArticlesListBinding
@@ -37,9 +38,6 @@ class ArticlesListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
     }
 
     override fun onCreateView(
@@ -65,25 +63,16 @@ class ArticlesListFragment : Fragment() {
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
         articlesAdapter = ArticlesRecyclerViewAdapter()
+        recyclerView.apply {
+            adapter = articlesAdapter.apply {
+
+            }
+            layoutManager = LinearLayoutManager(activity)
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-    }
-
-    companion object {
-
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
-
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            ArticlesListFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_COLUMN_COUNT, columnCount)
-                }
-            }
     }
 }
