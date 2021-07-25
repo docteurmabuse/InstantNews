@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -123,6 +124,12 @@ class ArticlesListFragment : Fragment(), ArticlesRecyclerViewAdapter.Interaction
     private fun setupRecyclerView(recyclerView: RecyclerView) {
         articlesAdapter = ArticlesRecyclerViewAdapter(this@ArticlesListFragment)
         recyclerView.apply {
+            addItemDecoration(
+                DividerItemDecoration(
+                    recyclerView.context,
+                    (recyclerView.layoutManager as LinearLayoutManager).orientation
+                )
+            )
             adapter = articlesAdapter.apply {
                 addLoadStateListener { loadState ->
                     if (loadState.refresh is LoadState.Loading) {
