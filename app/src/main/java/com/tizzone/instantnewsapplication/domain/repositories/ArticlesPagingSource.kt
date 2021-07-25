@@ -5,6 +5,7 @@ import androidx.paging.PagingState
 import com.tizzone.instantnewsapplication.data.network.NewsApi
 import com.tizzone.instantnewsapplication.domain.model.Article
 import com.tizzone.instantnewsapplication.domain.model.mappers.ArticlesItemDtoMapper
+import com.tizzone.instantnewsapplication.utils.ARTICLES_PAGE_SIZE
 import com.tizzone.instantnewsapplication.utils.ARTICLES_STARTING_PAGE_INDEX
 import retrofit2.HttpException
 import java.io.IOException
@@ -27,7 +28,7 @@ class ArticlesPagingSource(
             val nextKey = if (articles.isEmpty()) {
                 null
             } else {
-                position + (params.loadSize / ARTICLES_STARTING_PAGE_INDEX)
+                position + (params.loadSize / ARTICLES_PAGE_SIZE)
             }
             LoadResult.Page(
                 data = mapper.toDomainArticleList(articles),
