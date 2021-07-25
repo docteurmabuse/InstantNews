@@ -169,7 +169,6 @@ class ArticlesListFragment : Fragment(), ArticlesRecyclerViewAdapter.Interaction
 
     override fun onItemSelected(position: Int, article: Article) {
         Timber.d("Click Article position: $position & ${article.title}")
-        val navHostFragment: View? = view?.findViewById(R.id.nav_host_fragment_activity_main)
         val bundle = Bundle()
         bundle.putParcelable(ARG_ARTICLE_ID, article)
         view?.findNavController()?.navigate(R.id.articleDetailFragment, bundle)
