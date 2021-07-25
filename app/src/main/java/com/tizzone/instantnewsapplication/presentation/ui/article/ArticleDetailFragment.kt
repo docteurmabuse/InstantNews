@@ -61,7 +61,7 @@ class ArticleDetailFragment : Fragment() {
             (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
             toolbarLayout.title = context?.resources?.getString(R.string.app_name)
             articleDetailTitleText.text = article?.title
-            articleDetailDescriptionText.text= article?.description
+            articleDetailDescriptionText.text = article?.description
             articleDetailImage.load(article?.imageUrl) {
                 crossfade(true)
                 placeholder(R.drawable.ic_baseline_image_24)
@@ -93,5 +93,10 @@ class ArticleDetailFragment : Fragment() {
                 seeMoreFab.setImageResource(R.drawable.ic_baseline_arrow_forward_24)
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
