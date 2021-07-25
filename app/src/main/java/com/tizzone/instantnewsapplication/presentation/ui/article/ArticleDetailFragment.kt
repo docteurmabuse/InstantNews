@@ -47,14 +47,7 @@ class ArticleDetailFragment : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment ArticleDetailFragment.
          */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ArticleDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
+        const val ARG_ARTICLE_ID = "article_id"
     }
 }

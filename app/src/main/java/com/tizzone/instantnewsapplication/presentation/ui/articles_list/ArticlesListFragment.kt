@@ -10,17 +10,23 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.tizzone.instantnewsapplication.R
 import com.tizzone.instantnewsapplication.databinding.FragmentArticlesListBinding
 import com.tizzone.instantnewsapplication.domain.data.DataState
 import com.tizzone.instantnewsapplication.domain.model.Article
 import com.tizzone.instantnewsapplication.presentation.ui.adapters.ArticlesRecyclerViewAdapter
+import com.tizzone.instantnewsapplication.presentation.ui.article.ArticleDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -79,6 +85,13 @@ class ArticlesListFragment : Fragment(), ArticlesRecyclerViewAdapter.Interaction
                     }
                 }
             }
+        }
+        lifecycleScope.launch {
+            articlesAdapter.loadStateFlow
+                //Only emit when refresh loadState for change
+                .distinctUntilChangedBy { it.refresh }
+                .filter { it.refresh is LoadState.Loading }
+                .collect { binding.articlesList.scrollToPosition(0) }
         }
     }
 
@@ -144,6 +157,10 @@ class ArticlesListFragment : Fragment(), ArticlesRecyclerViewAdapter.Interaction
     }
 
     override fun onItemSelected(position: Int, article: Article) {
-        Timber.d("Click Article")
+        Timber.d("Click Article position: $position")
+        val navHostFragment: View? = view?.findViewById(R.id.nav_host_fragment_activity_main)
+        val bundle = Bundle()
+        bundle.putParcelable(ArticleDetailFragment.ARG_ARTICLE_ID, article)
+        view?.findNavController()?.navigate(R.id.articleDetailFragment)
     }
 }
