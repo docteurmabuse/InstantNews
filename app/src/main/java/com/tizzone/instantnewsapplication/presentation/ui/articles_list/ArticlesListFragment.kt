@@ -4,14 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.tizzone.instantnewsapplication.databinding.FragmentArticlesListBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * A fragment representing a list of Items.
  */
+@AndroidEntryPoint
 class ArticlesListFragment : Fragment() {
 
     private var columnCount = 1
@@ -23,6 +28,9 @@ class ArticlesListFragment : Fragment() {
     //ViewModels
     private val viewModel: ArticlesListViewModel by viewModels()
 
+    //Views
+    lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +50,22 @@ class ArticlesListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViews()
+
+
+    }
+
+    private fun initViews() {
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        swipeRefreshLayout = binding.swipeList
+        progressBar = binding.progressBarList
         val recyclerView: RecyclerView = binding.articlesList
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     companion object {
