@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/articles_nav_graph"
+    app:startDestination="@id/articlesListFragment">
+
+    <fragment
+        android:id="@+id/articlesListFragment"
+        android:name="com.tizzone.instantnewsapplication.presentation.ui.articles_list.ArticlesListFragment"
+        android:label="fragment_articles_list"
+        tools:layout="@layout/fragment_articles_list" >
+        <action
+            android:id="@+id/action_articlesListFragment_to_articleDetailFragment"
+            app:destination="@id/articleDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/articleDetailFragment"
+        android:name="com.tizzone.instantnewsapplication.presentation.ui.article.ArticleDetailFragment"
+        android:label="fragment_article_detail"
+        tools:layout="@layout/fragment_article_detail" >
+        <argument
+            android:name="article"
+            app:argType="com.tizzone.instantnewsapplication.domain.model.Article"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+</navigation>
