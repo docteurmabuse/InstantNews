@@ -59,6 +59,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.4.0'
 
     //Retrofit : A type-safe HTTP client for Android
     def retrofit_version = "2.9.0"
@@ -106,13 +107,16 @@ dependencies {
     testImplementation("com.google.dagger:hilt-android-testing:$hilt_version")
     kaptTest("com.google.dagger:hilt-compiler:$hilt_version")
 
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1'
+
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2'
     androidTestImplementation 'androidx.test:rules:1.4.0'
     androidTestImplementation('androidx.test:runner:1.4.0')
 
-    /*//Junit5
+    //Junit5
     def junit5_version = "5.7.1"
 
     // (Required) Writing and executing Unit Tests on the JUnit Platform
@@ -123,13 +127,15 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junit5_version")
 
     testImplementation("org.hamcrest:hamcrest-library:2.2")
-    // (Optional) If you also have JUnit 4-based tests
-    testImplementation("junit:junit:4.13.2"
-    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:$junit5_version"))*/
+
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:$junit5_version")
 
     //MockWebServer
     androidTestImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
     // OKhttp
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+
+    androidTestImplementation 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
+
 
 }
