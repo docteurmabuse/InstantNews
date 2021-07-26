@@ -79,7 +79,7 @@ class ArticlesListFragment : Fragment(), ArticlesRecyclerViewAdapter.Interaction
                         }
                     }
                     DataState.Status.LOADING -> {
-                        //Do Something
+                        //Progressbar is already manage with PagingDataAdapter
                     }
 
                     DataState.Status.ERROR -> {
@@ -139,7 +139,7 @@ class ArticlesListFragment : Fragment(), ArticlesRecyclerViewAdapter.Interaction
                         //Hide progressBar or swipe on load
                         progressBar.visibility = View.GONE
                         swipeRefreshLayout.isRefreshing = isHidden
-                        binding.noDataText?.visibility = View.GONE
+                        binding.noDataText.visibility = View.GONE
 
                         //Getting the error
                         val errorState = when {
@@ -154,7 +154,7 @@ class ArticlesListFragment : Fragment(), ArticlesRecyclerViewAdapter.Interaction
                                 "Error; ${it.error.message}",
                                 Toast.LENGTH_LONG
                             ).show()
-                            binding.noDataText?.visibility = View.VISIBLE
+                            binding.noDataText.visibility = View.VISIBLE
                         }
                     }
                 }
