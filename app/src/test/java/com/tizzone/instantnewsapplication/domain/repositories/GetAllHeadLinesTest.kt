@@ -1,11 +1,10 @@
-package com.tizzone.instantnewsapplication.domain.usecases
+package com.tizzone.instantnewsapplication.domain.repositories
 
 import com.google.gson.GsonBuilder
 import com.tizzone.instantnewsapplication.data.network.MockWebserverResponse.headlinesListResponse
 import com.tizzone.instantnewsapplication.data.network.NewsApi
 import com.tizzone.instantnewsapplication.domain.model.Article
 import com.tizzone.instantnewsapplication.domain.model.mappers.ArticlesItemDtoMapper
-import com.tizzone.instantnewsapplication.domain.repositories.ArticlesRepositoryImpl
 import com.tizzone.instantnewsapplication.domain.usecases.articles_list.GetAllHeadlines
 import kotlinx.coroutines.runBlocking
 import okhttp3.HttpUrl
@@ -36,6 +35,7 @@ class GetAllHeadLinesTest {
         mockWebServer.start()
         baseUrl = mockWebServer.url("")
 
+        //Instantiate system in test
         newsApi = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(
@@ -47,30 +47,27 @@ class GetAllHeadLinesTest {
             .build()
             .create(NewsApi::class.java)
 
-        //Instantiate system in test
-        articlesRepositoryImpl = ArticlesRepositoryImpl(newsApi, dtoMapper)
-
-        //Instantiate system in test
-       // getAllHeadLines = GetAllHeadlines(articlesRepositoryImpl)
     }
 
     @Test
-    fun getAllHeadLinesFromNetwork(): Unit = runBlocking {
+    fun testGetHeadLinesFromNetworkIsWorking(): Unit = runBlocking {
         //Condition the response
         mockWebServer.enqueue(
             MockResponse()
                 .setResponseCode(HttpsURLConnection.HTTP_OK)
                 .setBody(headlinesListResponse)
         )
-
-        val articles =  newsApi.getHeadLines().articles.let { dtoMapper.toDomainArticleList(it) }
+        var articles = listOf<Article>()
+        //Article list should be empty
+        assert(articles.isEmpty())
+        //Adding api result of articles in the list
+        articles = newsApi.getHeadLines().articles.let { dtoMapper.toDomainArticleList(it) }
+        //Article lilst should not be empty
         assert(articles.isNotEmpty())
-        assert(articles.get(index = 0) is Article)
-
     }
 
     @AfterEach
-    fun tearDown(){
+    fun tearDown() {
         mockWebServer.shutdown()
     }
 }
