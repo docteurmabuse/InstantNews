@@ -112,13 +112,29 @@ class MainActivityTest {
 
     @Test
     fun isRecyclerViewDisplayArticleItems() {
+        //Check text for no data is visible
+        onView(withId(R.id.no_data_text)).check(
+            matches(
+                ViewMatchers.withEffectiveVisibility(
+                    ViewMatchers.Visibility.VISIBLE
+                )
+            )
+        )
+
         val activityScenario = ActivityScenario.launch(MainActivity::class.java)
-        runBlocking {
             //Check RecyclerView is visibility visible
             onView(withId(R.id.articles_list)).check(
                 matches(
                     ViewMatchers.withEffectiveVisibility(
                         ViewMatchers.Visibility.VISIBLE
+                    )
+                )
+            )
+            //Check text for no data is not visible
+            onView(withId(R.id.no_data_text)).check(
+                matches(
+                    ViewMatchers.withEffectiveVisibility(
+                        ViewMatchers.Visibility.GONE
                     )
                 )
             )
@@ -133,13 +149,13 @@ class MainActivityTest {
                     )
                 )
             //Check the article's detail is show
-            // Title should be the same as the first item in the list
+            //Title should be the same as the first item in the list
             //Description should be the same as the first item in the list
             onView(withId(R.id.article_detail_title_text))
                 .check(matches(withText("JOendirect:ManonBrunetdécrochelebronzeausabre,laFranceterminelajournéeà5médailles-LeFigaro")))
             onView(withId(R.id.article_detail_description_text))
                 .check(matches(withText("DIRECT-SuivezendirectlatroisièmejournéedesJeuxolympiquesdeTokyo.")))
-        }
+
         activityScenario.close()
     }
 
