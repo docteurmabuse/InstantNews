@@ -109,8 +109,10 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test:rules:1.4.0'
+    androidTestImplementation('androidx.test:runner:1.4.0')
 
-    //Junit5
+    /*//Junit5
     def junit5_version = "5.7.1"
 
     // (Required) Writing and executing Unit Tests on the JUnit Platform
@@ -122,11 +124,11 @@ dependencies {
 
     testImplementation("org.hamcrest:hamcrest-library:2.2")
     // (Optional) If you also have JUnit 4-based tests
-    testImplementation("junit:junit:4.13.2")
-    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:$junit5_version")
+    testImplementation("junit:junit:4.13.2"
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:$junit5_version"))*/
 
     //MockWebServer
-    testImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
+    androidTestImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
     // OKhttp
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
 

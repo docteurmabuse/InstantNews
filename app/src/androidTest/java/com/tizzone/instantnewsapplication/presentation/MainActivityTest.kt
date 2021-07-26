@@ -25,6 +25,8 @@ import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
+
+
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -32,7 +34,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import java.net.HttpURLConnection
 import javax.inject.Singleton
-import org.hamcrest.MatcherAssert.assertThat
 
 
 @UninstallModules(UrlProvideModule::class)
