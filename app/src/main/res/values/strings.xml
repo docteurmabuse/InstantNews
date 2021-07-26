@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Instant News</string>
     <string name="see_more">See more</string>
+    <string name="there_is_no_news_to_show_check_your_internet_connection">There is no news to show. Check your Internet connection</string>
 </resources>

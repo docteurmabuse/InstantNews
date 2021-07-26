@@ -17,16 +17,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.net.ssl.HttpsURLConnection
 
-class GetAllHeadLinesTest {
+class ArticleRepositoryImpApiTest {
     private lateinit var mockWebServer: MockWebServer
     private lateinit var baseUrl: HttpUrl
 
     //System in test
-    private lateinit var getAllHeadLines: GetAllHeadlines
+    private lateinit var newsApi: NewsApi
 
     //Dependencies
-    private lateinit var newsApi: NewsApi
-    private lateinit var articlesRepositoryImpl: ArticlesRepositoryImpl
     private val dtoMapper = ArticlesItemDtoMapper()
 
     @BeforeEach
@@ -46,7 +44,6 @@ class GetAllHeadLinesTest {
             )
             .build()
             .create(NewsApi::class.java)
-
     }
 
     @Test
@@ -62,7 +59,7 @@ class GetAllHeadLinesTest {
         assert(articles.isEmpty())
         //Adding api result of articles in the list
         articles = newsApi.getHeadLines().articles.let { dtoMapper.toDomainArticleList(it) }
-        //Article lilst should not be empty
+        //Article list should not be empty
         assert(articles.isNotEmpty())
     }
 

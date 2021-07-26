@@ -21,7 +21,6 @@ import com.tizzone.instantnewsapplication.databinding.FragmentArticlesListBindin
 import com.tizzone.instantnewsapplication.domain.data.DataState
 import com.tizzone.instantnewsapplication.domain.model.Article
 import com.tizzone.instantnewsapplication.presentation.ui.adapters.ArticlesRecyclerViewAdapter
-import com.tizzone.instantnewsapplication.presentation.ui.article.ArticleDetailFragment
 import com.tizzone.instantnewsapplication.utils.ARG_ARTICLE_ID
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -140,6 +139,7 @@ class ArticlesListFragment : Fragment(), ArticlesRecyclerViewAdapter.Interaction
                         //Hide progressBar or swipe on load
                         progressBar.visibility = View.GONE
                         swipeRefreshLayout.isRefreshing = isHidden
+                        binding.noDataText?.visibility = View.GONE
 
                         //Getting the error
                         val errorState = when {
@@ -154,6 +154,7 @@ class ArticlesListFragment : Fragment(), ArticlesRecyclerViewAdapter.Interaction
                                 "Error; ${it.error.message}",
                                 Toast.LENGTH_LONG
                             ).show()
+                            binding.noDataText?.visibility = View.VISIBLE
                         }
                     }
                 }
@@ -167,6 +168,7 @@ class ArticlesListFragment : Fragment(), ArticlesRecyclerViewAdapter.Interaction
         _binding = null
     }
 
+    //Click listener on recyclerview item
     override fun onItemSelected(position: Int, article: Article) {
         Timber.d("Click Article position: $position & ${article.title}")
         val bundle = Bundle()
